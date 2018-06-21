@@ -7,6 +7,13 @@ export const receiveGreetings = (greetings) => {
   }
 }
 
+export const addGreetingAction = (greeting) => {
+  return {
+      type: 'ADD_GREETING',
+      greeting
+  }
+}
+
 export function getGreetings () {
   return (dispatch) => {
     request
@@ -17,6 +24,21 @@ export function getGreetings () {
           return
         }
         dispatch(receiveGreetings(res.body))
+      })
+  }
+}
+
+export function addGreeting (greeting) {
+  return (dispatch) => {
+    request
+      .post(`/api/greetings`)
+      .send(greeting)
+      .end((err, res)=> {
+        if(err) {
+          console.log(err.message)
+          return
+        }
+        dispatch(addGreetingAction(res.body))
       })
   }
 }

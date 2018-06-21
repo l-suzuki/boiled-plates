@@ -6,6 +6,13 @@ const getGreetings = (testConn) => {
     .select()
 }
 
+const addGreeting = (greeting, testConn) => {
+  const db = testConn || defaultConn
+  return db('greetings')
+    .insert(greeting)
+}
+
 module.exports = {
-  getGreetings
+  getGreetings,
+  addGreeting
 }

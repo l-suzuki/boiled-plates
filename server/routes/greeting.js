@@ -10,4 +10,13 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  greetingsDb.addGreeting(req.body)
+    .then(greeting => {
+      res.json(greeting)
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
 module.exports = router
